@@ -2,7 +2,11 @@ import pytest
 from unittest.mock import patch, MagicMock
 import os
 import tempfile
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
 from src.main import extract_audio, transcribe_audio, summarize_text, process_video
+
 
 @pytest.fixture
 def temp_video():
