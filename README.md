@@ -56,6 +56,7 @@ video_transcription_summary/
 │   └── main.py
 │
 ├── tests/
+│   └── test_main.py
 │
 ├── docs/
 │
@@ -75,6 +76,35 @@ Le script `main.py` contient plusieurs fonctions clés :
 4. `main()` : Orchestre le processus complet et gère les erreurs.
 
 Le script utilise `loguru` pour une journalisation détaillée, ce qui facilite le débogage et le suivi du processus.
+
+## Tests
+
+Ce projet utilise pytest pour les tests unitaires. Pour exécuter les tests :
+
+1. Assurez-vous d'avoir installé les dépendances de développement :
+   ```
+   pip install -r requirements.txt
+   ```
+
+2. Exécutez les tests :
+   ```
+   pytest tests/
+   ```
+
+## CI/CD
+
+Ce projet utilise GitHub Actions pour l'intégration continue et le déploiement continu (CI/CD). Le workflow est configuré pour :
+
+- Se déclencher manuellement via l'interface GitHub Actions
+- Formater le code avec Ruff
+- Exécuter les tests avec pytest
+
+Pour déclencher le workflow manuellement :
+
+1. Allez dans l'onglet "Actions" du repository GitHub
+2. Sélectionnez le workflow "Python CI"
+3. Cliquez sur "Run workflow"
+4. Optionnellement, spécifiez une branche, un tag ou un commit spécifique
 
 ## Contribution
 
