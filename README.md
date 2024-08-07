@@ -19,7 +19,7 @@ Ce projet offre un outil pour transcrire le contenu audio d'une vidéo et géné
 
 1. Clonez ce dépôt :
    ```
-   git clone https://github.com/votre-username/video-transcription-summary.git
+   git clone git@github.com:gpenessot/video_summarizer.git
    cd video-transcription-summary
    ```
 
@@ -38,19 +38,13 @@ Ce projet offre un outil pour transcrire le contenu audio d'une vidéo et géné
 
 ## Utilisation
 
-1. Placez votre fichier vidéo dans le répertoire du projet ou notez son chemin complet.
+Exécutez le script en spécifiant le chemin de votre fichier vidéo :
 
-2. Modifiez la variable `video_path` dans le fichier `src/main.py` pour qu'elle pointe vers votre fichier vidéo :
-   ```python
-   video_path = "chemin/vers/votre/video.mp4"
-   ```
+```
+python main.py chemin/vers/votre/video.mp4
+```
 
-3. Exécutez le script :
-   ```
-   python src/main.py
-   ```
-
-4. Les résultats (transcription et résumé) seront affichés dans la console et enregistrés dans le fichier `video_processing.log`.
+Les résultats (transcription et résumé) seront affichés dans la console et enregistrés dans le fichier `video_processing.log`.
 
 ## Structure du projet
 
