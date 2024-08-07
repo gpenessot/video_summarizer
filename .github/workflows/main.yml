@@ -1,6 +1,10 @@
 name: Python CI
 
 on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       git-ref:
@@ -11,7 +15,7 @@ jobs:
   lint-and-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         ref: ${{ github.event.inputs.git-ref }}
     
@@ -26,18 +30,14 @@ jobs:
         pip install -r requirements.txt
         pip install ruff pytest
     
+    - name: Check formatting with Ruff
+      run: |
+        ruff format --check .
+    
     - name: Format code with Ruff
+      if: failure()
       run: |
         ruff format .
-    
-    - name: Check for changes
-      id: git-check
-      run: |
-        git diff --exit-code || echo "changes=true" >> $GITHUB_OUTPUT
-    
-    - name: Commit changes
-      if: steps.git-check.outputs.changes == 'true'
-      run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add -A
@@ -46,4 +46,4 @@ jobs:
     
     - name: Run tests
       run: |
-        pytest
+        pytest tests/
