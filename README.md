@@ -19,7 +19,7 @@ Ce projet offre un outil pour transcrire le contenu audio d'une vidéo et géné
 
 1. Clonez ce dépôt :
    ```
-   git clone https://github.com/votre-username/video-transcription-summary.git
+   git clone git@github.com:gpenessot/video_summarizer.git
    cd video-transcription-summary
    ```
 
@@ -38,19 +38,13 @@ Ce projet offre un outil pour transcrire le contenu audio d'une vidéo et géné
 
 ## Utilisation
 
-1. Placez votre fichier vidéo dans le répertoire du projet ou notez son chemin complet.
+Exécutez le script en spécifiant le chemin de votre fichier vidéo :
 
-2. Modifiez la variable `video_path` dans le fichier `src/main.py` pour qu'elle pointe vers votre fichier vidéo :
-   ```python
-   video_path = "chemin/vers/votre/video.mp4"
-   ```
+```
+python main.py chemin/vers/votre/video.mp4
+```
 
-3. Exécutez le script :
-   ```
-   python src/main.py
-   ```
-
-4. Les résultats (transcription et résumé) seront affichés dans la console et enregistrés dans le fichier `video_processing.log`.
+Les résultats (transcription et résumé) seront affichés dans la console et enregistrés dans le fichier `video_processing.log`.
 
 ## Structure du projet
 
@@ -62,6 +56,7 @@ video_transcription_summary/
 │   └── main.py
 │
 ├── tests/
+│   └── test_main.py
 │
 ├── docs/
 │
@@ -81,6 +76,35 @@ Le script `main.py` contient plusieurs fonctions clés :
 4. `main()` : Orchestre le processus complet et gère les erreurs.
 
 Le script utilise `loguru` pour une journalisation détaillée, ce qui facilite le débogage et le suivi du processus.
+
+## Tests
+
+Ce projet utilise pytest pour les tests unitaires. Pour exécuter les tests :
+
+1. Assurez-vous d'avoir installé les dépendances de développement :
+   ```
+   pip install -r requirements.txt
+   ```
+
+2. Exécutez les tests :
+   ```
+   pytest tests/
+   ```
+
+## CI/CD
+
+Ce projet utilise GitHub Actions pour l'intégration continue et le déploiement continu (CI/CD). Le workflow est configuré pour :
+
+- Se déclencher manuellement via l'interface GitHub Actions
+- Formater le code avec Ruff
+- Exécuter les tests avec pytest
+
+Pour déclencher le workflow manuellement :
+
+1. Allez dans l'onglet "Actions" du repository GitHub
+2. Sélectionnez le workflow "Python CI"
+3. Cliquez sur "Run workflow"
+4. Optionnellement, spécifiez une branche, un tag ou un commit spécifique
 
 ## Contribution
 
