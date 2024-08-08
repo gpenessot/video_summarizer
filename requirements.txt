@@ -4,3 +4,4 @@ torch==2.0.1
 transformers==4.30.2
 loguru==0.7.0
 pytest==7.3.1
+ruff==0.1.3
