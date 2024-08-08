@@ -1,14 +1,14 @@
 import sys
 from pathlib import Path
 
-# Ajoutez le répertoire parent au sys.path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from src.main import extract_audio, transcribe_audio, summarize_text, process_video
-import pytest
-from unittest.mock import patch, MagicMock
 import os
 import tempfile
+import pytest
+from unittest.mock import patch, MagicMock
+
+from src.main import extract_audio, transcribe_audio, summarize_text, process_video
 
 
 @pytest.fixture
