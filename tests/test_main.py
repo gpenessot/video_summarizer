@@ -20,7 +20,8 @@ def temp_video():
     # Supprimer le fichier vidéo temporaire après les tests
     os.unlink(temp.name)
 
-@patch('moviepy.editor.VideoFileClip')
+
+@patch("moviepy.editor.VideoFileClip")
 def test_extract_audio(mock_video_file_clip, temp_video):
     # Simuler l'extraction audio
     mock_audio = MagicMock()
@@ -32,7 +33,8 @@ def test_extract_audio(mock_video_file_clip, temp_video):
     # Vérifier que la méthode write_audiofile a été appelée
     mock_audio.write_audiofile.assert_called_once_with(audio_path)
 
-@patch('whisper.load_model')
+
+@patch("whisper.load_model")
 def test_transcribe_audio(mock_load_model):
     # Simuler la transcription
     mock_model = MagicMock()
@@ -43,21 +45,25 @@ def test_transcribe_audio(mock_load_model):
 
     assert result == "Ceci est un test de transcription."
 
-@patch('transformers.AutoTokenizer.from_pretrained')
-@patch('transformers.AutoModelForCausalLM.from_pretrained')
+
+@patch("transformers.AutoTokenizer.from_pretrained")
+@patch("transformers.AutoModelForCausalLM.from_pretrained")
 def test_summarize_text(mock_model, mock_tokenizer):
     # Simuler la génération de résumé
     mock_tokenizer.return_value.return_value = MagicMock()
     mock_model.return_value.generate.return_value = [MagicMock()]
-    mock_tokenizer.return_value.decode.return_value = "Résumé : Ceci est un résumé de test."
+    mock_tokenizer.return_value.decode.return_value = (
+        "Résumé : Ceci est un résumé de test."
+    )
 
     result = summarize_text("Ceci est un long texte à résumer.")
 
     assert result == "Ceci est un résumé de test."
 
-@patch('main.extract_audio')
-@patch('main.transcribe_audio')
-@patch('main.summarize_text')
+
+@patch("main.extract_audio")
+@patch("main.transcribe_audio")
+@patch("main.summarize_text")
 def test_process_video(mock_summarize, mock_transcribe, mock_extract, temp_video):
     # Simuler le processus complet
     mock_transcribe.return_value = "Ceci est une transcription de test."
@@ -70,18 +76,22 @@ def test_process_video(mock_summarize, mock_transcribe, mock_extract, temp_video
     assert transcription == "Ceci est une transcription de test."
     assert summary == "Ceci est un résumé de test."
 
-@patch('main.extract_audio', side_effect=Exception("Erreur d'extraction"))
+
+@patch("main.extract_audio", side_effect=Exception("Erreur d'extraction"))
 def test_process_video_error(mock_extract, temp_video):
     # Tester la gestion des erreurs
     result = process_video(temp_video)
 
     assert result is None
 
+
 def test_main_cli(capsys, temp_video):
     # Test de l'interface en ligne de commande
-    with patch('sys.argv', ['main.py', temp_video]), \
-         patch('main.process_video', return_value=("Transcription test", "Résumé test")):
+    with patch("sys.argv", ["main.py", temp_video]), patch(
+        "main.process_video", return_value=("Transcription test", "Résumé test")
+    ):
         from main import main
+
         main()
         captured = capsys.readouterr()
         assert "Transcription test" in captured.out
